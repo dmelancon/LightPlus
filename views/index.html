@@ -30,11 +30,12 @@
 	}
 
 	.all{
-		width : 80%;
+		width : 20%;
 		margin: 0 auto;
 	}
 	.section{
-		display: inline block;
+		/*display: inline block;*/
+		
 	}
 	.header {
 		width: 100%;
@@ -84,6 +85,23 @@
 		position: absolute;
 		left: 36%;
 	}
+	.button-test2 {
+		margin: 20px auto;
+		padding: 20px;
+		font-weight: 400;
+		color: black;
+		height: 60px;
+		border-width: 1px;
+		text-align: center;
+		line-height : 10px;
+		font-size: 30px;
+		border-radius: 10px;
+		background: rgb(231,76,60); 	
+		width: 12%;
+		z-index: 35;
+		position: absolute;
+		left: 52%;
+	}
 	.button-ok {
 		margin: 20px auto;
 		padding: 20px;
@@ -132,7 +150,7 @@
 		z-index:20;
 	}
 	.timePicker{
-		padding-left:50%
+		padding-left:66%
 	}
 	.timePicker2{
 		left: 36%;
@@ -172,7 +190,6 @@
 		color:white;
 		text-indent: -150px;
 		line-height : .5;
-		z-index: 160;
 	}
 	#slider2{
 		width: 38%;
@@ -190,7 +207,6 @@
 		color:white;
 		text-indent: -150px;
 		line-height : .5;
-		z-index: 60;
 	}
 	#slider3{
 		width: 38%;
@@ -208,7 +224,6 @@
 		color: white;
 		text-indent: -150px;
 		line-height : .5;
-		z-index: 60;
 
 	}
 	#amount1{
@@ -269,6 +284,7 @@
 				console.log(this.id);
 				var parentId = this.id;
 				$('.button-ok').hide();
+				$('#'+parentId+'.button-test2').hide();
 				$('#darkCanvas').show();
 				$( "#darkCanvas" ).animate({opacity: 0.5}, 200, function(){
 					$('#'+parentId+'.submenu').show();
@@ -276,6 +292,12 @@
 				
 			});
 			$('.button-change').click(function(e){
+				$("#slider1").slider('value',127);
+				$( "#amount1" ).val( "Brightness: " + 127 );
+				$("#slider2").slider('value',127);
+				$( "#amount2" ).val( "Brightness: " + 127 );
+				$("#slider3").slider('value',127);
+				$( "#amount3" ).val( "Brightness: " + 127 );
 				var parentId = this.id;
 				$('.section').hide();
 				$(this).hide();
@@ -292,14 +314,16 @@
 				$('.timePicker2').hide();
 				$('#stepTime').timepicker('setTime', new Date());
 				$("#"+parentId+".button-ok").show();
-				$("#"+parentId+".button-test").hide();
+				$("#"+parentId+".button-test2").show();
+				//$("#"+parentId+".button-test").hide();
 				$('#darkCanvas').hide();
 			});
 			$('.button-test').click(function(e){
 				console.log(this);
-				$.get( this.id);
 				var parentId = this.id;
+				$.get( '/test'+this.id);
 				$( "#darkCanvas" ).animate({opacity: 0.8}, 2000, function(){
+					$('#darkCanvas').show();
 					$('#stepTime2').timepicker('setTime', new Date());
 					$('.timePicker2').show();
 					$("#"+parentId+".button-ok").show();
@@ -309,21 +333,43 @@
 				$("#"+parentId+".button-change").hide();
 				
 			});
+			$('.button-test2').click(function(e){
+				console.log(this);
+				var light1, light2, light3;
+				if ($('.timePicker').is(':visible')) startTime= $('#stepTime').val();
+				if ($('.timePicker2').is(':visible')) startTime= $('#stepTime2').val();
+				if ($('#slider1').is(':visible')) light1 = bri1;
+				if ($('#slider2').is(':visible')) light2= bri2;
+				if ($('#slider3').is(':visible')) light3= bri3;
+				if (light1||light2||light3){
+					$.post( '/set'+this.id, { mode: parentId, time: startTime, light1Bri: light1,light2Bri: light2,light3Bri:light3 } );
+				}else{
+					$.post( '/set'+this.id, { mode: parentId, time: startTime} );
+				}
+				var parentId = this.id;
+				$.get( '/test'+this.id);
+				$('#darkCanvas').show();
+				$( "#darkCanvas" ).css({opacity: 0, "z-index": 100});
+				$( "#darkCanvas" ).animate({opacity: 0.8}, 2000, function(){
+					$('#stepTime').timepicker('setTime', new Date());
+					$('.timePicker').show();
+					$("#"+parentId+".button-ok").show();
+					$("#"+parentId+".button-test2").show();
+					$( "#darkCanvas" ).css({opacity: 0, "z-index": 1});
+					$( "#darkCanvas" ).hide();
+				});
+			});
 
 			$('.button-ok').click(function(e){
 				var parentId = this.id
-				var light1,light2,light3;
-				// console.log(bri1);
-				// console.log(bri2);
-				// console.log(bri3);
-				//var startTime = $('#stepTime').val();
+				var light1, light2, light3;
 				if ($('.timePicker').is(':visible')) startTime= $('#stepTime').val();
 				if ($('.timePicker2').is(':visible')) startTime= $('#stepTime2').val();
 				if ($('#slider1').is(':visible')) light1 = bri1;
 				if ($('#slider2').is(':visible')) light2= bri2;
 				if ($('#slider3').is(':visible')) light3= bri3;
 				console.log(startTime);
-				if (light1&&light2&&light3){
+				if (light1||light2||light3){
 					$.post( '/set'+this.id, { mode: parentId, time: startTime, light1Bri: light1,light2Bri: light2,light3Bri:light3 } );
 				}else{
 					$.post( '/set'+this.id, { mode: parentId, time: startTime} );
@@ -344,11 +390,8 @@
 				$(this).hide();
 				$("#"+parentId+".submenu").hide();
 				$( "#darkCanvas" ).css("opacity", "0");
-				// $('#stepTime').val(null);
-				// $('#stepTime2').val(null);
-
 			});
-	
+			
 			 $( "#slider1" ).slider({
 		      range: "max",
 		      min: 0,
@@ -416,22 +459,22 @@
 		</div>
 	</div></center>
 		<div class="submenu" id="sleep">
-		<center><button id="sleep" class="button-change pure-button">Change</button>  <button id="sleep" class="button-test pure-button" >Test</button>  <button id="sleep" class="button-ok pure-button" >Ok</button></center>
+		<center><button id="sleep" class="button-change pure-button">Change</button>  <button id="sleep" class="button-test pure-button" >Test</button><button id="sleep" class="button-test2 pure-button" >Test</button><button id="sleep" class="button-ok pure-button" >Ok</button></center>
 		</div>
 		<div class="submenu" id="watch">
-		<center><button id="watch" class="button-change pure-button" >Change</button>  <button id="watch" class="button-test pure-button" >Test</button>  <button id="watch" class="button-ok pure-button" >Ok</button></center>
+		<center><button id="watch" class="button-change pure-button" >Change</button>  <button id="watch" class="button-test pure-button" >Test</button>  <button id="watch" class="button-test2 pure-button" >Test</button> <button id="watch" class="button-ok pure-button" >Ok</button></center>
 		</div>
 		<div class="submenu" id="study">
-		<center><button id="study" class="button-change pure-button" >Change</button>  <button id="study" class="button-test pure-button" >Test</button>  <button id="study" class="button-ok pure-button" >Ok</button></center>
+		<center><button id="study" class="button-change pure-button" >Change</button>  <button id="study" class="button-test pure-button" >Test</button> <button id="study" class="button-test2 pure-button" >Test</button> <button id="study" class="button-ok pure-button" >Ok</button></center>
 		</div>
 		<div class="submenu" id="dining">
-		<center><button  id="dining" class="button-change pure-button" >Change</button>  <button id="dining" class="button-test pure-button" >Test</button>  <button id="dining" class="button-ok pure-button" >Ok</button></center>
+		<center><button  id="dining" class="button-change pure-button" >Change</button>  <button id="dining" class="button-test pure-button" >Test</button> <button id="dining" class="button-test2 pure-button" >Test</button> <button id="dining" class="button-ok pure-button" >Ok</button></center>
 		</div>
 		<div class="timePicker">
 	        <h2>Start Time
 	        <input id="stepTime" type="text" class="time" size="8"/></h2>
         </div>
-		<div id="slider1">Light 3</div><label for="amount1"></label><input type="text" id="amount1">
+		<div id="slider1">Light 1</div><label for="amount1"></label><input type="text" id="amount1">
 		<div id="slider2">Light 2</div><label for="amount2"></label><input type="text" id="amount2">
 		<div id="slider3">Light 3</div><label for="amount3"></label><input type="text" id="amount3">
     

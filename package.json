@@ -1,15 +1,12 @@
 {
-  "name": "ExpressApp",
+  "name": "LightPlus",
   "version": "0.0.1",
-  "description": "A Node.js App using express",
+  "description": "A Node.js App to Interface with Hue Api",
   "dependencies": {
-    "express": "*"
-  },
-  "engine": "node >=0.6.x",
-  "devDependencies": {
-    "handlebars-helper-asset": "^0.1.0"
-  },
-  "keywords": [
-    "handlebars-helper-asset"
-  ]
+    "express": "*",
+    "express3-handlebars" : "0.5.2",
+    "body-parser": "1.12.*",
+    "node-hue-api": "1.0.5",
+    "handlebars-helper-asset":"0.1.0"
+  }
 }
