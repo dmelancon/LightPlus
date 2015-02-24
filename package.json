@@ -1,0 +1,15 @@
+{
+  "name": "ExpressApp",
+  "version": "0.0.1",
+  "description": "A Node.js App using express",
+  "dependencies": {
+    "express": "*"
+  },
+  "engine": "node >=0.6.x",
+  "devDependencies": {
+    "handlebars-helper-asset": "^0.1.0"
+  },
+  "keywords": [
+    "handlebars-helper-asset"
+  ]
+}

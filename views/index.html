@@ -1,0 +1,437 @@
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.6.0/jquery.timepicker.min.css">
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	  <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+
+  	<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.0/p5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.2/addons/p5.dom.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.6.0/jquery.timepicker.min.js"></script>
+	<style type="text/css">	
+
+	body {
+		background: black;
+		font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
+		font-size: 20px;
+		font-style: normal;
+		font-variant: normal;
+		font-weight: 500;
+		line-height: 26.3999996185303px;
+		color: white;
+		margin-left: auto;
+    		margin-right: auto;
+    		display: block;
+    		z-index: 0;
+    		position: relative;
+    /*		left: 0px;
+		top:0px;*/
+	}
+
+	.all{
+		width : 80%;
+		margin: 0 auto;
+	}
+	.section{
+		display: inline block;
+	}
+	.header {
+		width: 100%;
+		top: 0px;
+		left: 0px;
+		position: relative;
+	
+	}
+	.pure-button {
+		font-weight: 400;
+		color: black;
+		width: 300px;
+		height: 300px;
+		position: relative;
+		border-width: 4px;
+		border-color: black;
+		text-align: middle;
+		line-height : 10px;
+		font-size: 30px;
+		/*sborder-radius: 10px;*/
+		border-color:black;
+		border-width: 5px;
+		background: white;
+/*		left: 10%;
+/**/		float: left;
+		
+		
+	}
+	.main-button{
+		width: 25%;
+    		padding-bottom: 25%; 
+	}
+	.button-test {
+		margin: 20px auto;
+		padding: 20px;
+		font-weight: 400;
+		color: black;
+		height: 60px;
+		border-width: 1px;
+		text-align: center;
+		line-height : 10px;
+		font-size: 30px;
+		border-radius: 10px;
+		background: rgb(231,76,60); 	
+		width: 12%;
+		z-index: 35;
+		position: absolute;
+		left: 36%;
+	}
+	.button-ok {
+		margin: 20px auto;
+		padding: 20px;
+		font-weight: 400;
+		color: black;
+		height: 60px;
+		border-width: 1px;
+		text-align: center;
+		line-height : 10px;
+		font-size: 30px;
+		border-radius: 10px;
+		background: rgb(0,76,190); 	
+		width: 12%;
+		z-index: 35;
+		position: absolute;
+		left: 36%;
+	}
+
+	.button-change {
+		margin: 20px auto;
+		padding: 20px;
+		font-weight: 400;
+		color: black;
+		height: 60px;
+		border-width: 1px;
+		text-align: center;
+		line-height : 10px;
+		font-size: 30px;
+		border-radius: 10px;
+		background: rgb(52,152,219); 
+		width: 12%;
+		z-index: 35;
+		position: absolute;
+		left: 52%;
+	}
+	.button-save {
+		background: rgb(52,152,219); /* this is a light blue */
+		width: 12%;
+	}
+	.largeIcon{
+		background-color: white;
+		width: 50%;
+		height: 50%;
+		top: 10%;
+		left:25%;
+		z-index:20;
+	}
+	.timePicker{
+		padding-left:50%
+	}
+	.timePicker2{
+		left: 36%;
+		padding-top: 100px;
+		position: absolute;
+		z-index: 35;
+	}
+	#sleepCanvas{
+		padding-top:-150px;
+		padding-bottom:50px;
+	}
+	canvas#darkCanvas {
+		background-color: black;
+		width: 100%;
+		height: 100%;
+		display:block;
+		opacity:0;
+		z-index: 1;
+		position: absolute;
+		overflow:hidden
+		left: 0px;
+		top: 0px;
+	}
+
+	#slider1{
+		width: 38%;
+		font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
+		font-size: 24px;
+		font-style: normal;
+		font-variant: normal;
+		font-weight: 500;
+		border: 1px solid red;
+		font-size: 30px;
+		height: 20px;
+		left:36%;
+		margin-top:40px;
+		color:white;
+		text-indent: -150px;
+		line-height : .5;
+		z-index: 160;
+	}
+	#slider2{
+		width: 38%;
+		font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
+		font-size: 24px;
+		font-style: normal;
+		font-variant: normal;
+		font-weight: 500;
+		border: 1px solid red;
+		font-size: 30px;
+		height: 20px;
+		left:36%;
+		margin-top:40px;
+		font-weight: 400;
+		color:white;
+		text-indent: -150px;
+		line-height : .5;
+		z-index: 60;
+	}
+	#slider3{
+		width: 38%;
+		font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
+		font-size: 24px;
+		font-style: normal;
+		font-variant: normal;
+		font-weight: 500;
+		border: 1px solid red;
+		font-size: 30px;
+		height: 20px;
+		left:36%;
+		margin-top:40px;
+		font-weight: 400;
+		color: white;
+		text-indent: -150px;
+		line-height : .5;
+		z-index: 60;
+
+	}
+	#amount1{
+		font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
+		font-size: 24px;
+		font-style: normal;
+		font-variant: normal;
+		font-weight: 500;
+		background-color: black;
+		color: white;
+		padding-left: 77%;
+		margin-top: -27px;
+		border:none;	
+	}
+	#amount2{
+	
+		font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
+		font-size: 24px;
+		font-style: normal;
+		font-variant: normal;
+		font-weight: 500;
+		background-color: black;
+		color: white;
+		border:none;
+		padding-left: 77%;
+		margin-top: -27px;
+
+	}
+	#amount3{
+
+		font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
+		font-size: 24px;
+		font-style: normal;
+		font-variant: normal;
+		font-weight: 500;
+		background-color: black;
+		color: white;
+		margin-top: -27px;
+		padding-left: 77%;
+		border:none;
+	}
+	</style>	
+
+<script type="text/javascript">	
+		var bri1,bri2,bri3;
+		$(document).ready( function(e){
+			$('.submenu').hide();
+			$('#darkCanvas').hide();
+			$('.timePicker').hide();
+			$('.timePicker2').hide();
+			$('#slider1').hide();
+			$('#slider2').hide();
+			$('#slider3').hide();
+			$('#amount1').hide();
+			$('#amount2').hide();
+			$('#amount3').hide();
+			$('.menu').click(function(e){
+				console.log(this.id);
+				var parentId = this.id;
+				$('.button-ok').hide();
+				$('#darkCanvas').show();
+				$( "#darkCanvas" ).animate({opacity: 0.5}, 200, function(){
+					$('#'+parentId+'.submenu').show();
+				});
+				
+			});
+			$('.button-change').click(function(e){
+				var parentId = this.id;
+				$('.section').hide();
+				$(this).hide();
+				$('#slider1').class = parentId;
+				$('#slider2').class = parentId;
+				$('#slider3').class = parentId;
+				$('#slider1').show();
+				$('#slider2').show();
+				$('#slider3').show();
+				$('#amount1').show();
+				$('#amount2').show();
+				$('#amount3').show();
+				$('.timePicker').show();
+				$('.timePicker2').hide();
+				$('#stepTime').timepicker('setTime', new Date());
+				$("#"+parentId+".button-ok").show();
+				$("#"+parentId+".button-test").hide();
+				$('#darkCanvas').hide();
+			});
+			$('.button-test').click(function(e){
+				console.log(this);
+				$.get( this.id);
+				var parentId = this.id;
+				$( "#darkCanvas" ).animate({opacity: 0.8}, 2000, function(){
+					$('#stepTime2').timepicker('setTime', new Date());
+					$('.timePicker2').show();
+					$("#"+parentId+".button-ok").show();
+					$("#"+parentId+".button-change").show();
+				});
+				$(this).hide();
+				$("#"+parentId+".button-change").hide();
+				
+			});
+
+			$('.button-ok').click(function(e){
+				var parentId = this.id
+				var light1,light2,light3;
+				// console.log(bri1);
+				// console.log(bri2);
+				// console.log(bri3);
+				//var startTime = $('#stepTime').val();
+				if ($('.timePicker').is(':visible')) startTime= $('#stepTime').val();
+				if ($('.timePicker2').is(':visible')) startTime= $('#stepTime2').val();
+				if ($('#slider1').is(':visible')) light1 = bri1;
+				if ($('#slider2').is(':visible')) light2= bri2;
+				if ($('#slider3').is(':visible')) light3= bri3;
+				console.log(startTime);
+				if (light1&&light2&&light3){
+					$.post( '/set'+this.id, { mode: parentId, time: startTime, light1Bri: light1,light2Bri: light2,light3Bri:light3 } );
+				}else{
+					$.post( '/set'+this.id, { mode: parentId, time: startTime} );
+				}
+				console.log(this.id)
+				$('#darkCanvas').hide();
+				$('.timePicker').hide();
+				$('.timePicker2').hide();
+				$('#slider1').hide();
+				$('#slider2').hide();
+				$('#slider3').hide();
+				$('#amount1').hide();
+				$('#amount2').hide();
+				$('#amount3').hide();
+				$("#"+parentId+".button-test").show();
+				$("#"+parentId+".button-change").show();
+				$('.section').show();
+				$(this).hide();
+				$("#"+parentId+".submenu").hide();
+				$( "#darkCanvas" ).css("opacity", "0");
+				// $('#stepTime').val(null);
+				// $('#stepTime2').val(null);
+
+			});
+	
+			 $( "#slider1" ).slider({
+		      range: "max",
+		      min: 0,
+		      max: 255,
+		      value: 127,
+		      slide: function( event, ui ) {
+		        $( "#amount1" ).val( "Brightness: " + ui.value );
+		     	bri1 = ui.value;
+		      }
+		    }); $( "#slider2" ).slider({
+		      range: "max",
+		      min: 0,
+		      max: 255,
+		      value: 127,
+		      slide: function( event, ui ) {
+		        $( "#amount2" ).val( "Brightness: " + ui.value );
+		        bri2 = ui.value;
+		      }
+		    });
+		    $( "#slider3" ).slider({
+		      range: "max",
+		      min: 0,
+		      max: 255,
+		      value: 127,
+		      slide: function( event, ui ) {
+		        $( "#amount3" ).val( "Brightness: " + ui.value );
+		        bri3 = ui.value;
+		      }
+		    });
+		    $( "#amount1" ).val( "Brightness: " + $( "#slider1" ).slider( "value" ) );
+		    $( "#amount2" ).val( "Brightness: " + $( "#slider2" ).slider( "value" ) );
+		    $( "#amount3" ).val( "Brightness: " + $( "#slider3" ).slider( "value" ) );
+			$('#stepTime').timepicker({ 'step': 5,'timeFormat': 'H:i' });
+			$('#stepTime2').timepicker({ 'step': 5,'timeFormat': 'H:i' });
+			$('#stepTime').timepicker('setTime', new Date());
+			$('#stepTime2').timepicker('setTime', new Date());
+		});
+
+   
+	</script>
+</head>
+<body>
+
+<canvas id="darkCanvas" ></canvas>
+
+	<div class="header"><img src= "./images/background_1.png" width = 100%></div>
+		<div class="timePicker2">
+                <h2>Start Time
+                <input id="stepTime2" type="text" class="time" size="8"/></h2>
+           </div>
+    
+	<center><div id="all" class="section">
+	
+		<div id="sleep" class="menu">
+		<button class="pure-button main-button" id="sleep"><center><img src= "./images/sleep.png" style = "width: 60%; padding-top:30%;"></center></button>
+		</div>
+		<div id="watch" class="menu">
+		<button class="pure-button main-button" id="watch"><center><img src= "./images/watchtv.png" style = "width: 60%; padding-top:25%;"></center></button>
+		</div>
+		<div id="study" class="menu">
+		<button class="pure-button main-button" id="study"><center><img src= "./images/reading.png" style = "width: 60%; padding-top:36%;"></center></button>
+		</div>
+		<div id="dining" class="menu">
+		<button class="pure-button main-button" id="dining"><center><img src= "./images/dining.png" style = "width: 60%; padding-top:36%;"></center></button>
+		</div>
+	</div></center>
+		<div class="submenu" id="sleep">
+		<center><button id="sleep" class="button-change pure-button">Change</button>  <button id="sleep" class="button-test pure-button" >Test</button>  <button id="sleep" class="button-ok pure-button" >Ok</button></center>
+		</div>
+		<div class="submenu" id="watch">
+		<center><button id="watch" class="button-change pure-button" >Change</button>  <button id="watch" class="button-test pure-button" >Test</button>  <button id="watch" class="button-ok pure-button" >Ok</button></center>
+		</div>
+		<div class="submenu" id="study">
+		<center><button id="study" class="button-change pure-button" >Change</button>  <button id="study" class="button-test pure-button" >Test</button>  <button id="study" class="button-ok pure-button" >Ok</button></center>
+		</div>
+		<div class="submenu" id="dining">
+		<center><button  id="dining" class="button-change pure-button" >Change</button>  <button id="dining" class="button-test pure-button" >Test</button>  <button id="dining" class="button-ok pure-button" >Ok</button></center>
+		</div>
+		<div class="timePicker">
+	        <h2>Start Time
+	        <input id="stepTime" type="text" class="time" size="8"/></h2>
+        </div>
+		<div id="slider1">Light 3</div><label for="amount1"></label><input type="text" id="amount1">
+		<div id="slider2">Light 2</div><label for="amount2"></label><input type="text" id="amount2">
+		<div id="slider3">Light 3</div><label for="amount3"></label><input type="text" id="amount3">
+    
