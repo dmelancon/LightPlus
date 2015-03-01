@@ -389,7 +389,7 @@
 
 				$('.button-ok').click(function(e){
 					var parentId = this.id
-						if (this.id == 'study') mObj = studyObj;
+					if (this.id == 'study') mObj = studyObj;
 					if (this.id == 'sleep') mObj = sleepObj;
 					if (this.id == 'dining') mObj = diningObj;
 					if (this.id == 'watch' ) mObj = watchObj;
@@ -462,11 +462,11 @@
 				});
 				$('#stepTimeWatch').on('changeTime', function() {
 					diningObj.time = $(this).val()
-					$.post( '/setwatch', diningObj);
+					$.post( '/setwatch', watchObj);
 				});
 				$('#stepTimeStudy').on('changeTime', function() {
 					diningObj.time = $(this).val()
-					$.post( '/setstudy', diningObj);
+					$.post( '/setstudy', studyObj);
 				});
 
 			});

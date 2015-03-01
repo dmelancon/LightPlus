@@ -8,6 +8,6 @@
     "body-parser": "1.12.*",
     "node-hue-api": "1.0.5",
     "handlebars-helper-asset":"0.1.0",
-    "node-schedule": "*"
+    "node-crontab": "*"
   }
 }

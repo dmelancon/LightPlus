@@ -2,7 +2,8 @@ var express = require('express');
 var app = express();
 var expressHbs = require('express3-handlebars');
 var bodyParser = require('body-parser')
-var schedule = require('node-schedule');
+var crontab = require('node-crontab');
+
 var displayResult = function(result) {
     console.log(JSON.stringify(result, null, 2));
     //scheduleId = result.id;
@@ -236,22 +237,21 @@ var lightTest = function(typeLight){
 
 var setSchedule = function(typeLight){
   console.log(typeLight.on);
-  if (typeLight.schedule) schedule.cancelJob(typeLight.schedule.name);
-  var cronJob =  typeLight.time.slice(0,2) + ' ' + typeLight.time.slice(3,5)  + ' * * *'
+  if (typeLight.schedule) crontab.cancelJob(typeLight.schedule);
+  var cronJob = typeLight.time.slice(3,5) + ' ' + typeLight.time.slice(0,2) + ' * * *'
   console.log(cronJob);
+  typeLight.schedule = crontab.scheduleJob(cronJob, function(){
+    console.log(typeLight.mode + "cron is Happening");
+    lightTest(typeLight);
+  });
   if (typeLight.on == 1){
-    typeLight.schedule = schedule.scheduleJob(cronJob, function(){
-      lightTest(typeLight);
-      console.log(typeLight.mode + "Event is Happening")
-    });
     console.log(typeLight.schedule.name);
     typeLight.schedule.name = typeLight.mode;
     console.log(typeLight.mode + "cron is On");
-    //console.log(schedule);
   }else{
     if (typeLight.schedule){
-      schedule.cancelJob(typeLight.schedule.name);
-      console.log(typeLight.mode + "cron is Off")
+      crontab.cancelJob(typeLight.schedule);
+      console.log(typeLight.mode + "cron is Off");
     }
   }
 
