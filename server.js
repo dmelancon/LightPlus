@@ -97,10 +97,6 @@ app.get('/testsleep', function(req, res){
   lightTest(sleepLight);
   res.end();
 });
-app.get('/testsleepoff', function(req, res){
-  lightTestOff(sleepLight);
-  res.end();
-});
 
 
 app.get('/sleep/:bool', function(req, res){
@@ -124,11 +120,6 @@ app.post('/setsleep', function(req, res){
 //route to test Watch mode
 app.get('/testwatch', function(req, res){
   lightTest(watchLight);
-  res.end();
-});
-
-app.get('/testwatchoff', function(req, res){
-  lightTestOff(watchLight);
   res.end();
 });
 
@@ -156,10 +147,7 @@ app.get('/teststudy', function(req, res){
     res.end();
 });
 
-app.get('/teststudyoff', function(req, res){
-  lightTestOff(studyLight);
-  res.end();
-});
+
 
 app.get('/study/:bool', function(req, res){
    studyLight.on = req.params.bool;
@@ -185,10 +173,6 @@ app.get('/testdining', function(req, res){
   res.end();
 });
 
-app.get('/testdiningoff', function(req, res){
-  lightTestOff(diningLight);
-  res.end();
-});
 
 app.get('/dining/:bool', function(req, res){
   diningLight.on = req.params.bool;
@@ -219,6 +203,12 @@ app.get('/all', function(req, res){
   res.send(JSON.stringify(file));
   res.end();
 });
+
+app.get('/off', function(req, res){
+  lightTestOff();
+  res.end();
+});
+
 
 app.listen(8000, function(){
   console.log("server is running on port 8000");
@@ -254,7 +244,7 @@ var lightTest = function(typeLight){
         .fail(displayError)
         .done();
 }
-var lightTestOff = function(typeLight){
+var lightTestOff = function(){
     
     state1 = lightState.create().off();
     state2 = lightState.create().off();
