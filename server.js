@@ -97,6 +97,11 @@ app.get('/testsleep', function(req, res){
   lightTest(sleepLight);
   res.end();
 });
+app.get('/testsleepoff', function(req, res){
+  lightTestOff(sleepLight);
+  res.end();
+});
+
 
 app.get('/sleep/:bool', function(req, res){
   sleepLight.on = req.params.bool;
@@ -119,6 +124,11 @@ app.post('/setsleep', function(req, res){
 //route to test Watch mode
 app.get('/testwatch', function(req, res){
   lightTest(watchLight);
+  res.end();
+});
+
+app.get('/testwatchoff', function(req, res){
+  lightTestOff(watchLight);
   res.end();
 });
 
@@ -146,6 +156,11 @@ app.get('/teststudy', function(req, res){
     res.end();
 });
 
+app.get('/teststudyoff', function(req, res){
+  lightTestOff(studyLight);
+  res.end();
+});
+
 app.get('/study/:bool', function(req, res){
    studyLight.on = req.params.bool;
    setSchedule(studyLight);
@@ -167,6 +182,11 @@ app.post('/setstudy', function(req, res){
 //route to test Dining mode
 app.get('/testdining', function(req, res){
   lightTest(diningLight);
+  res.end();
+});
+
+app.get('/testdiningoff', function(req, res){
+  lightTestOff(diningLight);
   res.end();
 });
 
@@ -218,6 +238,27 @@ var lightTest = function(typeLight){
     state2 = lightState.create().on().bri(bri2).transition(400);
     bri3 =   parseInt(typeLight.light3Bri)
     state3 = lightState.create().on().bri(bri3).transition(400);;
+
+    api.setLightState(1, state1)
+        .then(displayResult)
+        .fail(displayError)
+        .done();
+
+    api.setLightState(4, state2)
+        .then(displayResult)
+        .fail(displayError)
+        .done();
+
+    apiStrip.setLightState(1, state3)
+        .then(displayResult)
+        .fail(displayError)
+        .done();
+}
+var lightTestOff = function(typeLight){
+    
+    state1 = lightState.create().off();
+    state2 = lightState.create().off();
+    state3 = lightState.create().off();
 
     api.setLightState(1, state1)
         .then(displayResult)
