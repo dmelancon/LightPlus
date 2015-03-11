@@ -43,7 +43,7 @@ var sleepLight = {
   light1Bri: 169,
   light2Bri: 246,
   light3Bri: 84,
-  on: 1
+  on: 0
 }
 
 var watchLight = { 
@@ -67,7 +67,7 @@ var studyLight = {
   light1Bri: 169,
   light2Bri: 246,
   light3Bri: 84,
-  on: 1
+  on: 0
 }
 
 var diningLight = { 

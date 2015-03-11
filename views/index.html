@@ -309,6 +309,8 @@
 				
 				$('.main-button').click(function(e){
 					var mBool;
+					$('.main-button').css("background-color", "white");
+
 					if (this.id == 'study'){
 					 mBool = studyObj.on;
 					 studyObj.on =! studyObj.on;
@@ -327,10 +329,10 @@
 					}
 					
 					if (mBool == true){
-						$.get( '/'+this.id+ '/1');
+						$.get( '/test'+this.id);
 						$(this).css("background-color", "#B2B2B2");
 					}else{
-						$.get( '/'+this.id+ '/0');
+						$.get( '/off');
 						$(this).css("background-color", "white");
 					}
 				});
